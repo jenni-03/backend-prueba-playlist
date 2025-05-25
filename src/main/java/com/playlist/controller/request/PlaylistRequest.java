@@ -1,23 +1,20 @@
 package com.playlist.controller.request;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class SongRequest {
-    private Long id;
+public class PlaylistRequest {
     @NotNull
-    private String titulo;
+    private String nombre;
     @NotNull
-    private String artista;
-    @NotNull
-    private String album;
-    @NotNull
-    private String anno;
-    @NotNull
-    private String genero;
+    private String descripcion;
+    private List<@Valid SongRequest> canciones;
 }

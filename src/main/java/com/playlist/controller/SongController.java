@@ -1,5 +1,7 @@
 package com.playlist.controller;
 
+import com.playlist.controller.mappers.SongRestMapper;
+import com.playlist.controller.request.SongRequest;
 import com.playlist.dto.Song;
 import com.playlist.service.SongService;
 import jakarta.validation.Valid;
@@ -17,6 +19,7 @@ import java.util.List;
 public class SongController {
 
     private final SongService songService;
+    private final SongRestMapper songRestMapper;
 
 
     @GetMapping
@@ -27,9 +30,9 @@ public class SongController {
 
 
     @PostMapping
-    public ResponseEntity<Song> createSong(@Valid @RequestBody Song songRequest) {
+    public ResponseEntity<Song> createSong(@Valid @RequestBody SongRequest songRequest) {
 
-        Song song = songService.create(songRequest);
+        Song song = songService.create(songRestMapper.requestToDomain(songRequest));
 
         return new ResponseEntity<>(song, HttpStatus.CREATED);
     }

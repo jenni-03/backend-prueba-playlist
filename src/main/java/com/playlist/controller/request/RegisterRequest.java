@@ -8,16 +8,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class SongRequest {
-    private Long id;
+public class RegisterRequest {
+
     @NotNull
-    private String titulo;
+    private String email;
+
     @NotNull
-    private String artista;
+    private String password;
+
     @NotNull
-    private String album;
-    @NotNull
-    private String anno;
-    @NotNull
-    private String genero;
+    private String name;
 }

@@ -1,5 +1,7 @@
 package com.playlist.controller;
 
+import com.playlist.controller.mappers.PlaylistRestMapper;
+import com.playlist.controller.request.PlaylistRequest;
 import com.playlist.dto.Playlist;
 import com.playlist.service.PlaylistService;
 import jakarta.validation.Valid;
@@ -16,6 +18,7 @@ import java.util.List;
 @RequestMapping("/lists")
 public class PlaylistController {
     private final PlaylistService playlistService;
+    private final PlaylistRestMapper playlistRestMapper;
 
     @GetMapping
     public ResponseEntity<List<Playlist>> getAllPlaylist() {
@@ -23,20 +26,20 @@ public class PlaylistController {
     }
 
     @PostMapping
-    public ResponseEntity<Playlist> createPlaylist(@RequestBody @Valid Playlist playlistRequest) {
-        return new ResponseEntity<>(playlistService.create(playlistRequest), HttpStatus.CREATED);
+    public ResponseEntity<Playlist> createPlaylist(@RequestBody @Valid PlaylistRequest playlistRequest) {
+        return new ResponseEntity<>(playlistService.create(playlistRestMapper.requestToDomain(playlistRequest)), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{listName}")
-    public ResponseEntity<Playlist> getPlaylistByName(@PathVariable @NotNull String listName) {
-        Playlist domain = playlistService.findByName(listName);
+    @GetMapping("/{playlistName}")
+    public ResponseEntity<Playlist> getPlaylistByName(@PathVariable @NotNull String playlistName) {
+        Playlist domain = playlistService.findByName(playlistName);
         return new ResponseEntity<>((domain), HttpStatus.OK);
 
     }
 
-    @DeleteMapping("/{listName}")
-    public ResponseEntity<Void> deletePlaylistByName(@PathVariable @NotNull String listName) {
-        playlistService.delete(listName);
+    @DeleteMapping("/{playlistName}")
+    public ResponseEntity<Void> deletePlaylistByName(@PathVariable @NotNull String playlistName) {
+        playlistService.delete(playlistName);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

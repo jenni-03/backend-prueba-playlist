@@ -55,7 +55,7 @@ public class SongImpl implements SongService {
             playlist.get().getCanciones().add(song.get());
             playlistRepository.save(playlist.get());
         } else {
-            throw new BusinessException("playlist.message.playlist.alreadyexists", playlistName);
+            throw new BusinessException("playlist.message.playlist.alreadyexists", song.get().getTitulo());
         }
 
         return "Canción agregada a la playlist con exito";

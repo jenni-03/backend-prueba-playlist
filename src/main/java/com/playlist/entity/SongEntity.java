@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table( name = "song")
 @Getter
@@ -29,4 +32,7 @@ public class SongEntity {
 
     @Column(name = "genero", nullable = false)
     private String genero;
+
+    @ManyToMany(mappedBy = "canciones")
+    private List<PlaylistEntity> playlists = new ArrayList<>();
 }

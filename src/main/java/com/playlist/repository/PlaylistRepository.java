@@ -1,13 +1,14 @@
 package com.playlist.repository;
 
-import com.playlist.entity.SongEntity;
+import com.playlist.entity.PlaylistEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface SongRepository extends JpaRepository<SongEntity, Long> {
-    Optional<SongEntity> findByTitulo(String title);
+public interface PlaylistRepository extends JpaRepository<PlaylistEntity, Integer> {
+
+    Optional<PlaylistEntity> findByNombre(String name);
 
 }

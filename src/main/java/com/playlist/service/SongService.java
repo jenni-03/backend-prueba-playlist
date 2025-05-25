@@ -11,4 +11,6 @@ public interface SongService {
 
     Song create(Song playlist);
 
+    String addSongToPlaylist(String playlistName, Long songId);
+
 }
